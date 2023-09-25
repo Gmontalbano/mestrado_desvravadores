@@ -3,11 +3,7 @@ from pgs.mestrados import get_mestrados
 from PIL import Image
 from utils.sql import get_mestrado_code,get_especialidades_list
 
-if "user_especialidades" not in st.session_state:
-    st.session_state.user_especialidades = []
 
-if "load_state" not in st.session_state:
-    st.session_state.load_state = False
 
 
 def get_info(option, data):

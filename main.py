@@ -1,7 +1,11 @@
 import streamlit as st
 from PIL import Image
 from pgs import mestrados,calculadora
+if "user_especialidades" not in st.session_state:
+    st.session_state.user_especialidades = []
 
+if "load_state" not in st.session_state:
+    st.session_state.load_state = False
 
 def main():
     img, title_text = st.columns([1, 2])
