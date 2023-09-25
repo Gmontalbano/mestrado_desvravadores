@@ -1,9 +1,7 @@
 import streamlit as st
 from PIL import Image
 from pgs import mestrados,calculadora
-import sqlite3
-conn = sqlite3.connect('./utils/data.db')
-cursor = conn.cursor()
+
 
 def main():
     img, title_text = st.columns([1, 2])
@@ -14,10 +12,8 @@ def main():
     choice = st.sidebar.selectbox("Selecione uma opção", menu)
     if choice == "Mestrados":
         mestrados.show_mestrado()
-        conn.close()
     elif choice == 'Calculadora de mestrados':
         calculadora.calculardo_mestrado()
-        conn.close()
 if __name__ == '__main__':
     main()
-    conn.close()
+

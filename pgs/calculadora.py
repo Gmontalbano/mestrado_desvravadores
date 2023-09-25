@@ -1,11 +1,8 @@
 import streamlit as st
-import sqlite3
 from pgs.mestrados import get_mestrados
 from PIL import Image
+from utils.sql import get_mestrado_code,get_especialidades_list
 
-# Conecte-se ao seu banco de dados SQLite
-conn = sqlite3.connect('./utils/data.db')
-cursor = conn.cursor()
 if "user_especialidades" not in st.session_state:
     st.session_state.user_especialidades = []
 
@@ -19,18 +16,10 @@ def get_info(option, data):
             return item
     return None
 
-def get_mestrado_code(code):
-    cursor.execute("SELECT mestrado_codigo FROM MestradoEspecialidade WHERE especialidade_codigo = ?", (code,))
-    # Recuperar os resultados da consulta
-    mestrados_code = cursor.fetchall()
-
-    return mestrados_code
 
 def calculardo_mestrado():
-    cursor.execute("SELECT * FROM especialidades")
-    # Recuperar os resultados da consulta
-    especialidades_list = cursor.fetchall()
-    choice = st.selectbox("Adicione uma especialidade:", [op[1] for op in especialidades_list])
+    especialidades_list = get_especialidades_list()
+    choice  = st.selectbox("Adicione uma especialidade:", [op[1] for op in especialidades_list])
     if st.button("Adicionar"):
         if choice not in st.session_state.user_especialidades:
             st.session_state.user_especialidades.append(choice)

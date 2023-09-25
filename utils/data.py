@@ -1,4 +1,4 @@
-import sqlite3
+'''import sqlite3
 
 # Conecte-se ao seu banco de dados SQLite
 conn = sqlite3.connect('data.db')
@@ -27,3 +27,4 @@ except Exception as e:
 finally:
     # Feche a conexão com o banco de dados
     conn.close()
+'''

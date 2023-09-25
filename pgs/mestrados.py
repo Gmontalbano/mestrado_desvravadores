@@ -1,17 +1,6 @@
 import streamlit as st
-import sqlite3
 from PIL import Image
-
-# Conecte-se ao seu banco de dados SQLite
-conn = sqlite3.connect('./utils/data.db')
-cursor = conn.cursor()
-
-
-def get_mestrados():
-    cursor.execute("SELECT * FROM Mestrados")
-    # Recuperar os resultados da consulta
-    mestrados_list = cursor.fetchall()
-    return mestrados_list
+from utils.sql import get_mestrados, get_info_mestrados, get_info_especialidades
 
 
 def get_info(option, data):
@@ -20,17 +9,6 @@ def get_info(option, data):
             return item
     return None
 
-
-def get_info_mestrados(codigo):
-    cursor.execute("SELECT * FROM MestradoEspecialidade WHERE mestrado_codigo = ?", (codigo,))
-    # Recuperar os resultados da consulta
-    especialidades_list = cursor.fetchall()
-    return especialidades_list
-
-def get_info_especialidades(codigo):
-    cursor.execute("SELECT nome FROM especialidades WHERE codigo = ?", (codigo,))
-    nome = cursor.fetchall()
-    return nome[0][0]
 
 def show_mestrado():
     m = get_mestrados()

@@ -1,4 +1,4 @@
-import requests
+"""import requests
 from bs4 import BeautifulSoup
 import sqlite3
 
@@ -46,4 +46,4 @@ for link in links:
 conn.commit()
 
 # Feche a conexão
-conn.close()
+conn.close()"""
