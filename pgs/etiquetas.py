@@ -22,7 +22,7 @@ def make():
             copias += 1
 
         print(f"Duplicando o slide {copias - 1} vezes")
-        ppt = duplicate_slides(pptx, n_copies=copias - 1)
+        # ppt = duplicate_slides(pptx, n_copies=copias - 1)
 
         keys = []
         words = []
