@@ -155,15 +155,15 @@ def replace_text_by_image(ppt, search_str, image_link, how='all', adjust_size=Fa
 
 def duplicate_slides(ppt1, ppt2='same', index=-1, n_copies=1):
     if ppt2 == 'same' or ppt1 == ppt2:
-        ppt1.save('temp.pptx')
-        ppt1 = slides.Presentation('temp.pptx')
+        #ppt1.save('temp.pptx')
+        ppt1 = slides.Presentation(ppt1)
         ppt2 = ppt1
     else:
-        ppt1.save('temp.pptx')
-        ppt1 = slides.Presentation('temp.pptx')
+        #ppt1.save(ppt1)
+        ppt1 = slides.Presentation(ppt1)
 
-        ppt2.save('temp.pptx')
-        ppt2 = slides.Presentation('temp.pptx')
+        #ppt2.save('temp.pptx')
+        ppt2 = slides.Presentation(ppt2)
 
     for i in range(n_copies):
         ppt1.slides.add_clone(ppt2.slides[index])
@@ -171,9 +171,9 @@ def duplicate_slides(ppt1, ppt2='same', index=-1, n_copies=1):
         # Lib diferente da pptx então nosso delete_shape não funciona
         ppt1.slides[-1].shapes.remove(ppt1.slides[-1].shapes[-1])
 
-    ppt1.save('temp.pptx', slides.export.SaveFormat.PPTX)
+    #ppt1.save('temp.pptx', slides.export.SaveFormat.PPTX)
 
-    ppt = Presentation('temp.pptx')
+    ppt = Presentation(ppt1)
 
     for slide in ppt.slides:
         # slide.shapes[-1].text = ''
