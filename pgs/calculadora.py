@@ -1,7 +1,7 @@
 import streamlit as st
 from pgs.mestrados import get_mestrados
 from PIL import Image
-from utils.sql import get_mestrado_code,get_especialidades_list
+from utils.sql import get_mestrado_code,get_especialidades_list,insert_data_e,get_e_user,get_info_especialidades
 
 
 
@@ -23,6 +23,7 @@ def calculardo_mestrado():
         st.write(e)
     if st.button("Calcular mestrados!") or st.session_state.load_state:
         st.session_state.load_state = True
+
         mestrados_list = get_mestrados()
         cross_info = {}
         for m in mestrados_list:
@@ -32,13 +33,25 @@ def calculardo_mestrado():
                                'min': qtd,
                                'have': 0,
                                'list': []}
-        for e in st.session_state.user_especialidades:
-            info = get_info(e, especialidades_list)
-            mestrado_code = get_mestrado_code(info[0])
-            if len(mestrado_code) > 0:
-                for c in mestrado_code:
-                    cross_info[c[0]]['have'] += 1
-                    cross_info[c[0]]['list'].append(e)
+        if len(st.session_state.user_especialidades) == 0:
+            st.session_state.user_especialidades = get_e_user()
+            for x in st.session_state.user_especialidades:
+                name = get_info_especialidades(x)
+                mestrado_code = get_mestrado_code(x)
+                if len(mestrado_code) > 0:
+                    for c in mestrado_code:
+                        cross_info[c[0]]['have'] += 1
+                        cross_info[c[0]]['list'].append(name)
+        else:
+            for e in st.session_state.user_especialidades:
+                info = get_info(e, especialidades_list)
+                insert_data_e(u_code=1, e_code=info[0])
+                mestrado_code = get_mestrado_code(info[0])
+
+                if len(mestrado_code) > 0:
+                    for c in mestrado_code:
+                        cross_info[c[0]]['have'] += 1
+                        cross_info[c[0]]['list'].append(e)
 
         #st.write(cross_info)
         col1, col2, col3 = st.columns(3)
