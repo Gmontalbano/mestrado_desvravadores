@@ -13,7 +13,7 @@ def make():
     qtd = st.number_input("Quantas etiquetas temos por página", step=1)
     qtd = int(qtd)
     if st.button('Gerar'):
-        pptx = Presentation(ppt)
+        ppt = Presentation(ppt)
         df = pd.read_excel(uploaded_file, engine='openpyxl')
         linhas = len(df)
         copias = linhas // qtd
