@@ -17,6 +17,7 @@ def make():
         df = pd.read_excel(uploaded_file, engine='openpyxl')
         linhas = len(df)
         copias = linhas // qtd
+        print(copias)
         if linhas % qtd != 0:
             copias += 1
 
